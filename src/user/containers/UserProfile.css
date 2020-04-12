@@ -1,0 +1,27 @@
+/* Create two unequal columns that floats next to each other */
+.profile-info-column {
+    float: left;
+    padding: 10px;
+  }
+
+.profile-recipe-column {
+    float: left;
+    padding: 10px;
+}
+
+.left {
+width: 30%;
+background-color:#aaa;
+}
+
+.right {
+width: 70%;
+background-color:#bbb
+}
+  
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}

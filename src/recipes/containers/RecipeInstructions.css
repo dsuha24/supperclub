@@ -1,0 +1,26 @@
+/* Create two unequal columns that floats next to each other */
+.comment-column {
+  float: left;
+  padding: 10px;
+}
+.instruction-column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 30%;
+  background-color:#aaa;
+}
+
+.right {
+  width: 70%;
+  background-color:#bbb
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
