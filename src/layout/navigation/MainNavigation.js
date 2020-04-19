@@ -8,19 +8,31 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import FilterListIcon from '@material-ui/icons/FilterList';
+// import { List } from '@material-ui/core';
 
 import "./MainNavigation.css";
+import AuthModal from '../../shared/components/AuthModal';
+import { Drawer } from '@material-ui/core';
+import FilterBar from './Filters/FilterBar';
+// import PersistentDrawerLeft from '../../shared/components/PersistentDrawerLeft';
+// import clsx from 'clsx';
+// import { Drawer } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  // drawer: {
+  //   width: "300px",
+  // },
+
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -85,9 +97,11 @@ export default function MainNavigation() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [filterMenu, setFilterMenu] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isFilterMenuOpen = Boolean(filterMenu);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -106,7 +120,17 @@ export default function MainNavigation() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleFilterMenuOpen = (event) => {
+    setFilterMenu(event.currentTarget);
+  }
+
+  const handleFilterMenuClose = () => {
+    setFilterMenu(null);
+  };
+
   const menuId = 'primary-search-account-menu';
+  const filterMenuId = 'primary-filter-menu';
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -117,9 +141,30 @@ export default function MainNavigation() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+    <AuthModal
+      open={isMenuOpen}
+    />
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
     </Menu>
+  );
+
+  const renderFilterMenu = (
+    <div className="filter-drawer">
+      <Drawer
+        // className={classes.drawer}
+        // variant="permanent"
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+        id={filterMenuId}
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        open={isFilterMenuOpen}
+        onClose={handleFilterMenuClose}
+      >
+      <FilterBar />
+      </Drawer>
+    </div>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -168,12 +213,17 @@ export default function MainNavigation() {
       <AppBar position="sticky">
         <Toolbar>
           <IconButton
-            edge="start"
-            className={classes.menuButton}
+            // edge="start"
+            // className={classes.menuButton}
+            // color="inherit"
+            // aria-label="open drawer"
+            aria-label="show more"
+            aria-controls={filterMenuId}
+            aria-haspopup="true"
+            onClick={handleFilterMenuOpen}
             color="inherit"
-            aria-label="open drawer"
           >
-            <MenuIcon />
+            <FilterListIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Supper Club
@@ -212,7 +262,7 @@ export default function MainNavigation() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton>  
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -229,6 +279,7 @@ export default function MainNavigation() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {renderFilterMenu}
     </div>
   );
 }

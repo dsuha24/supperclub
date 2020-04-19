@@ -1,6 +1,10 @@
 import React from 'react';
 
 import RecipeList from '../components/RecipeList';
+import RecipeModal from '../components/UIElements/RecipeModal';
+
+import "./Recipes.css";
+// import RecipeInstructions from './RecipeInstructions';
 
 const Recipes = () => {
   const RECIPES = [
@@ -16,7 +20,7 @@ const Recipes = () => {
       author: "Daryl Suharli"
     },
     {
-      id: 'u1',
+      id: 'u2',
       recipeName: 'Kouign Amann',
       image:
         'https://media.daysoftheyear.com/20171223132649/kouign-amann-day.jpg',
@@ -27,7 +31,7 @@ const Recipes = () => {
       author: "Dominique Ansel"
     },
     {
-      id: 'u1',
+      id: 'u3',
       recipeName: 'Bee Sting Pizza',
       image:
         'https://eatingwithziggy.files.wordpress.com/2015/04/img_1598.jpg',
@@ -38,7 +42,7 @@ const Recipes = () => {
       author: "Nancy Silverton"
     },
     {
-      id: 'u1',
+      id: 'u4',
       recipeName: 'Soup Tortellini',
       image:
         'https://ca-times.brightspotcdn.com/dims4/default/961ea02/2147483647/strip/true/crop/2048x1365+0+0/resize/840x560!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F37%2F1f%2F70e48399903956ac70885ec66ad8%2Flat-fo-gold-alimento-photos-la0022728618-20141007',
@@ -51,13 +55,22 @@ const Recipes = () => {
   ];
 
   return (
-    <div>
+    <div className="main-recipe-page">
+      <h1>Challenge of the month</h1>
+      <div>
+        <RecipeList items={RECIPES}>
+          {/* <RecipeModal /> */}
+        </RecipeList>
+      </div>
+      <br></br>
+      <RecipeModal />
+      <h1>Trending</h1>
       <div>
         <RecipeList items={RECIPES} />
       </div>
-      <br></br>
+      <h1>Best recipes of the month</h1>
       <div>
-        <RecipeList items={RECIPES}/>
+        <RecipeList items={RECIPES} />
       </div>
     </div>
   );

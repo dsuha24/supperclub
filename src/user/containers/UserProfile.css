@@ -1,4 +1,4 @@
-/* Create two unequal columns that floats next to each other */
+/* Create two unequal columns that floats next to each other
 .profile-info-column {
     float: left;
     padding: 10px;
@@ -10,18 +10,17 @@
 }
 
 .left {
-width: 30%;
+width: 15%;
 background-color:#aaa;
 }
 
 .right {
-width: 70%;
+width: 85%;
 background-color:#bbb
 }
   
-/* Clear floats after the columns */
 .row:after {
 content: "";
 display: table;
 clear: both;
-}
+} */

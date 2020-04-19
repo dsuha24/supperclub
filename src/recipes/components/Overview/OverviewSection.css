@@ -1,3 +1,7 @@
 .overview-section {
-    background-color: violet;
+    /* background-color: violet; */
+}
+
+.recipe-profile-link {
+   font-size: small; 
 }

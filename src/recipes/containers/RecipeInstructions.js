@@ -6,7 +6,7 @@ import './RecipeInstructions.css';
 const RecipeInstructions = props => {
 
     return (
-        <div class="row">
+        <div class="row recipe-instructions-container">
             <div className="comment-column left">
                 <CommentSection />
             </div>
