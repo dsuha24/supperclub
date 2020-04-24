@@ -8,7 +8,7 @@ const UserProfile = props => {
             <div class="profile-info-column left">
                 <ProfileInfo />
             </div>
-            <div class="profile-recipe-column left">
+            <div class="profile-recipe-column right">
                 <h2>4 tabs - all, original, remix, attempts</h2>
                 <h3>RecipeList associate with them</h3>
             </div>   

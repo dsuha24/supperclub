@@ -24,39 +24,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function RecipeModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Button Overlay
-      </button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.onClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={props.open}>
           <div className={classes.paper}>
             <RecipeInstructions 
-              
+              recipeName={props.recipeName}
+              image={props.image}
+              ingredients={props.ingredients}
+              steps={props.steps}
+              equipmentTable={props.equipmentTable}
             />
           </div>
         </Fade>

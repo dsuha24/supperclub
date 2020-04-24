@@ -15,15 +15,21 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 // import { List } from '@material-ui/core';
 
 import "./MainNavigation.css";
 import AuthModal from '../../shared/components/AuthModal';
-import { Drawer } from '@material-ui/core';
+import { Drawer, Modal } from '@material-ui/core';
 import FilterBar from './Filters/FilterBar';
+import NewRecipe from '../../recipes/containers/NewRecipe';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 // import PersistentDrawerLeft from '../../shared/components/PersistentDrawerLeft';
 // import clsx from 'clsx';
 // import { Drawer } from '@material-ui/core';
+
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -42,6 +48,24 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+
+  modal: {
+    display: 'flex',
+    alignItems: 'top',
+    justifyContent: 'center',
+    marginTop: "30px",
+    marginBottom: "20px",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    overflowY: "scroll",
+    borderRadius:"20px",
+    width: "500px"
+  },
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -98,10 +122,12 @@ export default function MainNavigation() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [filterMenu, setFilterMenu] = React.useState(null);
+  const [newRecipe, setNewRecipe] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isFilterMenuOpen = Boolean(filterMenu);
+  const isNewRecipeOpen = Boolean(newRecipe);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -128,8 +154,36 @@ export default function MainNavigation() {
     setFilterMenu(null);
   };
 
+  const handleNewRecipeOpen = (event) => {
+    setNewRecipe(event.currentTarget);
+  };
+
+  const handleNewRecipeClose = () => {
+    setNewRecipe(null);
+  };
+
+
   const menuId = 'primary-search-account-menu';
   const filterMenuId = 'primary-filter-menu';
+
+  const renderNewRecip = (
+    <Modal 
+      open={isNewRecipeOpen}
+      onClose={handleNewRecipeClose}
+      closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      className={classes.modal}
+    >
+      <Fade in={newRecipe}>
+          <div className={classes.paper}>
+            <NewRecipe />
+          </div>
+        </Fade>
+    </Modal>
+  );
 
   const renderMenu = (
     <Menu
@@ -138,6 +192,8 @@ export default function MainNavigation() {
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -243,6 +299,13 @@ export default function MainNavigation() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <IconButton 
+              color="inherit"
+              onClick={handleNewRecipeOpen}
+            >
+              Add New Recipe
+              <AddCircleIcon />
+            </IconButton>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
@@ -280,6 +343,7 @@ export default function MainNavigation() {
       {renderMobileMenu}
       {renderMenu}
       {renderFilterMenu}
+      {renderNewRecip}
     </div>
   );
 }

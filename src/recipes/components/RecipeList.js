@@ -20,11 +20,16 @@ export default function RecipeList(props) {
 
   const classes = useStyles();
 
+
+
   return (
     <Grid container className={classes.root} spacing={2}>
         <Grid container justify="left" wrap="nowrap">
           {props.items.map(recipe => (
             <RecipeItem
+                onClick={props.onItemclick}
+                open={props.open}
+                handleModalClose={props.handleModalClose}
                 key={recipe.id}
                 id={recipe.id}
                 image={recipe.image}
@@ -32,6 +37,9 @@ export default function RecipeList(props) {
                 time={recipe.time}
                 description={recipe.description}
                 author={recipe.author}
+                ingredients={recipe.ingredients}
+                steps={recipe.steps}
+                equipmentTable={recipe.equipmentTable}
             />
           ))} 
         </Grid>

@@ -13,33 +13,14 @@ import AcccessibleTable from '../UIElements/AccessibleTable';
 //     createData('Euro Butter', 1, 'Cup', 1)
 // ];
 
-const ROWS1 = [
-    {
-        ingredient: 'Bread Flour',
-        amount: 3,
-        units: 'Cups',
-        subs: '3'
-    },
-    {
-        ingredient: 'Instant Yeast',
-        amount: '1/3',
-        units: 'Tsp',
-        subs: 2
-    },
-    {
-        ingredient: 'Euro Butter',
-        amount: 1,
-        units: 'Cups',
-        subs: 1
-    }
-]
+// import ROWS1 from "../../../user/UserData";
 
 export default function IngredientSection(props) {
     return (
         <div className="ingredient-section">
             <h1>Ingredient</h1>
             <p>click on the boxes to change the measurements</p>
-            <AcccessibleTable rows={ROWS1} 
+            <AcccessibleTable rows={props.list} 
                 firstColumn="Ingredients"
                 secondColumn="Amount"
                 thirdColumn="Units"
