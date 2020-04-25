@@ -295,7 +295,7 @@ const Recipes = props => {
     },
   ];
 
-  const cuisineList = "fRENCH";
+  // const cuisineList = "fRENCH";
   // const cuisineList = props.cuisineFilter;
 
   const [open, toggleModal] = React.useState(false);
@@ -308,8 +308,14 @@ const Recipes = props => {
     toggleModal(false);
   };
 
+  const [filterArray, handleFilter] = React.useState([]);
+
   const filteredRecipes = RECIPES.filter((item) => {
-    return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
+    // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
+    if(filterArray.length === 0) {
+      return item;
+    }
+    return filterArray.includes(item.cuisine);
   })
 
 
@@ -317,6 +323,7 @@ const Recipes = props => {
     <div className="main-recipe-page">
       <FilterBar 
         //getting data from child
+        handleFilter={handleFilter}
       />
       <h1>Challenge of the month</h1>
       <div>

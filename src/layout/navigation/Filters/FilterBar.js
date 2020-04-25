@@ -8,6 +8,8 @@ import TextField from '@material-ui/core/TextField';
 
 export default function FilterBar(props) {
 
+    const {handleFilter} = props;
+
     // function valueStore () {
     //     //store the value of the selected autocomplete
     //     //find the values in the displayed recipelist
@@ -17,8 +19,14 @@ export default function FilterBar(props) {
 
     const storeValue = (value) => {
         // console.log(value);
-        return value;
+        // return value;
+        const desArray = value.map(arr => arr.title)
+        handleFilter(desArray);
+
     }
+
+    
+
 
     return (
         <div>
