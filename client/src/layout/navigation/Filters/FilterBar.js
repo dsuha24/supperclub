@@ -8,45 +8,46 @@ import TextField from '@material-ui/core/TextField';
 
 export default function FilterBar(props) {
 
-    const {handleFilter} = props;
+    const {handleCuisineFilter, handleIngredientFilter, handleEquipmentFilter} = props;
 
-    // function valueStore () {
-    //     //store the value of the selected autocomplete
-    //     //find the values in the displayed recipelist
-    //     //make sure cuisine is an array
-    //     //hide the values that are not on the recipelist
-    // }
-
-    const storeValue = (value) => {
-        // console.log(value);
-        // return value;
+    const storeCuisineFilterValue = (value) => {
+        console.log(value);
         const desArray = value.map(arr => arr.title)
-        handleFilter(desArray);
-
+        handleCuisineFilter(desArray);
     }
 
-    
+    const storeIngredientFilterValue = (ingredientValue) => {
+        // console.log(ingredientValue)
+        const desIngredientFilterArray = ingredientValue.map(arrIngredient => arrIngredient.title)
+        handleIngredientFilter(desIngredientFilterArray);
+    }
 
+    const storeEquipmentFilterValue = (equipmentValue) => {
+        // console.log(ingredientValue)
+        const desEquipmentFilterArray = equipmentValue.map(arrEquipment => arrEquipment.title)
+        handleEquipmentFilter(desEquipmentFilterArray);
+    }
 
     return (
-        <div>
+        <div className="main-filter-bar">
             {/* <h1>Filters</h1> */}
             <Autocomplete
                 multiple
                 id="size-small-standard-multi"
                 size="small"
                 options={CUISINES}
-                onChange={(event, value) => storeValue(value)}
+                onChange={(event, value) => storeCuisineFilterValue(value)}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
                 <TextField {...params} variant="standard" label="Cuisines" placeholder="Cuisines" />
                 )}
             />
-            {/* <Autocomplete
+            <Autocomplete
                 multiple
                 id="size-small-standard-multi"
                 size="small"
                 options={INGREDIENTS}
+                onChange={(event, ingredientValue) => storeIngredientFilterValue(ingredientValue)}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
                 <TextField {...params} variant="standard" label="Ingredients" placeholder="Ingredients" />
@@ -57,22 +58,22 @@ export default function FilterBar(props) {
                 id="size-small-standard-multi"
                 size="small"
                 options={EQUIPMENT}
+                onChange={(event, ingredientValue) => storeEquipmentFilterValue(ingredientValue)}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
                 <TextField {...params} variant="standard" label="Equipment" placeholder="Ingredients" />
                 )}
-            /> */}
-            <h1>{storeValue}</h1>
+            />
         </div>
     );
 }
 
-// const INGREDIENTS = [
-//     { title: 'Bread Flour'},
-//     { title: 'Butter'},
-//     { title: 'Water'},
-//     { title: 'Yeast'},
-// ];
+const INGREDIENTS = [
+    { title: 'Bread Flour'},
+    { title: 'Butter'},
+    { title: 'Water'},
+    { title: 'Yeast'},
+];
 
 const CUISINES = [
     { title: 'French'},
@@ -87,9 +88,9 @@ const CUISINES = [
     { title: 'Peruvian'},
 ];
 
-// const EQUIPMENT = [
-//     { title: 'Stand Mixer'},
-//     { title: 'Rolling Pin'},
-//     { title: 'Plastic Wrap'},
-//     { title: 'Metal Pan'},
-// ];
+const EQUIPMENT = [
+    { title: 'Stand Mixer'},
+    { title: 'Rolling Pin'},
+    { title: 'Plastic Wrap'},
+    { title: 'Metal Pan'},
+];

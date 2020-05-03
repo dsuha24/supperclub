@@ -10,6 +10,7 @@ const CommentBox = props => {
           rows={4}
           defaultValue="Say some stuff..."
           variant="outlined"
+          onSubmit={(event, value) => console.log(value)}
         />
     );
 }

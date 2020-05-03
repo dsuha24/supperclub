@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -29,6 +29,8 @@ import Fade from '@material-ui/core/Fade';
 // import clsx from 'clsx';
 // import { Drawer } from '@material-ui/core';
 
+import {AuthContext} from '../../shared/context/auth-context';
+import { NavLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -118,6 +120,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MainNavigation() {
+
+  const auth = useContext(AuthContext);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -196,11 +200,15 @@ export default function MainNavigation() {
       aria-describedby="transition-modal-description"
       open={isMenuOpen}
       onClose={handleMenuClose}
+      onClick={handleMenuClose} //closes after you click the button, so it doesn't linger
     >
     <AuthModal
       open={isMenuOpen}
     />
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      
+      <NavLink to="/uid">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </NavLink>
       <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
     </Menu>
   );
@@ -281,9 +289,11 @@ export default function MainNavigation() {
           >
             <FilterListIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Supper Club
-          </Typography>
+          <NavLink to="/">
+            <Typography className={classes.title} variant="h6" noWrap>
+              Supper Club
+            </Typography>
+          </NavLink>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -306,16 +316,20 @@ export default function MainNavigation() {
               Add New Recipe
               <AddCircleIcon />
             </IconButton>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            {auth.isLoggedIn && (
+              <div>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton aria-label="show 17 new notifications" color="inherit">
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+              </div>
+            )}
             <IconButton
               edge="end"
               aria-label="account of current user"

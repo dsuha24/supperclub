@@ -12,6 +12,9 @@ const InstructionSection = props => {
                 <OverviewSection 
                     image={props.image}
                     recipeName={props.recipeName}
+                    cuisine={props.cuisine}
+                    likes={props.likes}
+                    saved={props.saved}
                 />
             </div>
             <div>

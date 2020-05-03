@@ -18,19 +18,10 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    watchList: { type: [Number], default: [] },
-    purchasedList: {
-        type: {
-            priceBought: {
-                type: Number,
-                required: true,
-            },
-            playerId: {
-                type: Number,
-                required: true,
-            },
-        },
-    },
+    // recipes: [{
+    //     // relation to recipes
+    //     // type: mongoose.Types.ObjectId, required: true, ref: 'recipe'
+    // }] //brackets to tell mongoose that there are multiple recipes for each user
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

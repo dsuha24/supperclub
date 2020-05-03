@@ -8,7 +8,10 @@ const RecipeInstructions = props => {
     return (
         <div class="row recipe-instructions-container">
             <div className="comment-column left">
-                <CommentSection />
+                <button>Save Recipe </button>
+                <CommentSection 
+                    commentList={props.commentList}
+                />
             </div>
             <div className="instruction-column right">
                 <InstructionSection
@@ -16,7 +19,10 @@ const RecipeInstructions = props => {
                     image={props.image}
                     ingredients={props.ingredients}
                     steps={props.steps}
+                    cuisine={props.cuisine}
                     equipmentTable={props.equipmentTable}
+                    likes={props.likes}
+                    saved={props.saved}
                 />
             </div>
         </div>

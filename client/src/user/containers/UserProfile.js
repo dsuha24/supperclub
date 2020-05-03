@@ -1,16 +1,56 @@
 import React from "react";
 import "./UserProfile.css"
 import ProfileInfo from "../components/profile/ProfileInfo";
+import RecipeList from "../../recipes/components/RecipeList";
+import FilterBar from "../../layout/navigation/Filters/FilterBar";
 
 const UserProfile = props => {
+
+    const [filterArray, handleFilter] = React.useState([]);
+
+    const filteredRecipes = props.USERS.recipes.filter((item) => {
+    // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
+    if(filterArray.length === 0) {
+        return item;
+    }
+    return filterArray.includes(item.cuisine);
+    })
+
+
+    // handling the modal================================================
+    const [open, toggleModal] = React.useState(false);
+  
+    const handleModalOpen = () => {
+      toggleModal(true);
+    };
+  
+    const handleModalClose = () => {
+      toggleModal(false);
+    };
+    //====================================================================
+
+
     return (
-        <div class="row">
+        <div class="user-profile-container">
             <div class="profile-info-column left">
-                <ProfileInfo />
+                <ProfileInfo 
+                    USERS={props.USERS}
+                />
             </div>
-            <div class="profile-recipe-column right">
-                <h2>4 tabs - all, original, remix, attempts</h2>
-                <h3>RecipeList associate with them</h3>
+            <div class="profile-recipes-column right">
+                <FilterBar 
+                    handleFilter={handleFilter}
+                />
+                <br />
+                <h1>My Cookbook</h1>
+                <RecipeList
+                    // items={props.RECIPES}
+                    // items={props.USERS.recipes}
+                    items = {filteredRecipes}
+                    onItemclick={handleModalOpen} 
+                    open={open} 
+                    handleModalClose={handleModalClose}
+                />
             </div>   
         </div>  
     );

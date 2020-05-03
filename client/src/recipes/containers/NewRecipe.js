@@ -2,36 +2,36 @@ import React from 'react';
 import {Formik, Field, Form} from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import {TextField, Button, Select, MenuItem, FormControl, InputLabel} from '@material-ui/core';
-import MultipleSelect from '../../shared/components/UIElements/MultipleSelect';
+// import MultipleSelect from '../../shared/components/UIElements/MultipleSelect';
 
 import './NewRecipe.css'
 // import CustomizedHook from '../../shared/components/UIElements/CustomizedHook';
 
-const CUISINES = [
-    'French',
-    'Italian',
-    'American Southern',
-    'Spanish',
-    'Vietnamese',
-    'Indonesian',
-    'British',
-    'German',
-    'Japanese',
-    'Peruvian',
-];
+// const CUISINES = [
+//     'French',
+//     'Italian',
+//     'American Southern',
+//     'Spanish',
+//     'Vietnamese',
+//     'Indonesian',
+//     'British',
+//     'German',
+//     'Japanese',
+//     'Peruvian',
+// ];
 
-// const CUISINES1 = [
-//     { title: 'French'},
-//     { title: 'Italian'},
-//     { title: 'American Southern'},
-//     { title: 'Spanish'},
-//     { title: 'Vietnamese'},
-//     { title: 'Indonesian'},
-//     { title: 'British'},
-//     { title: 'German'},
-//     { title: 'Japanese'},
-//     { title: 'Peruvian'},
-//   ];
+const CUISINES = [
+    { title: 'French'},
+    { title: 'Italian'},
+    { title: 'American Southern'},
+    { title: 'Spanish'},
+    { title: 'Vietnamese'},
+    { title: 'Indonesian'},
+    { title: 'British'},
+    { title: 'German'},
+    { title: 'Japanese'},
+    { title: 'Peruvian'},
+  ];
 
 const INGREDIENTS = [
     { title: 'Bread Flour'},
@@ -97,7 +97,15 @@ export default function NewRecipe() {
                             <Field placeholder="Title" name="title" type="input" as={TextField} />
                         </div>
                         <div>
-                            <Field placeholder="Cuisines" name="cuisine" list={CUISINES} type="input" as={MultipleSelect} />
+                            {/* <Field placeholder="Cuisines" name="cuisine" list={CUISINES} type="input" as={MultipleSelect} /> */}
+                            <FormControl className={classes.longBoxStyle}>
+                                <InputLabel htmlFor="cuisine-type">Select a cuisine</InputLabel>
+                                <Field id="cuisine-type" placeholder="Select a cuisine" name="cuisine-type" type="input" autoWidth="true" as={Select}>
+                                    {CUISINES.map(cuis => (
+                                        <MenuItem value={cuis.title}>{cuis.title}</MenuItem>
+                                    ))}
+                                </Field>
+                            </FormControl>
                         </div>
                         <div>
                             <h1>Ingredients</h1>

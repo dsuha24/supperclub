@@ -6,6 +6,8 @@ const RecipeSchema = new Schema({
     author: {
         type: String,
         required: true,
+        // relation to users
+        // type: mongoose.Types.ObjectId, required: true, ref: 'user'
     },
     image: {
         type: String,

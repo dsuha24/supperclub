@@ -4,11 +4,35 @@ import Card from '../../shared/components/UIElements/Card';
 import RecipeModal from './UIElements/RecipeModal';
 
 const RecipeItem = props => {
-    // const handleItemClick = () => {
-    //     // handle the click
-    //     console.log('click: ', props.id)
+    const [open, toggleModal] = React.useState(false);
+    // const [inputOn, toggleInput] = React.useState(false);
+    // const [input, setInput] = React.useState('');
+    // const [newIngredients, setNewIngredients] = React.useState(null);
+  
+    const handleToggleModal= () => {
+      toggleModal(open => !open);
+    };
+
+
+    //==== ingredient conversion ===============================
+    // handleChange = (e) => {
+    //     setInput(e.target.value)
     // }
-      
+
+    // useEffect(() => {
+    //     // calculate amount here
+    //     const ni = props.ingredients.map(ingredient => {
+    //         ingredient.amount = recalculateAmount(ingredient.amount);
+    //     })
+
+       
+    // }, [input])
+
+ 
+    // return(
+    //     {!inputOn ? <div></div> : <input onChange={handleChange}>}
+
+    // console.log(props.cuisine)
 
     return(
         <div>
@@ -17,18 +41,23 @@ const RecipeItem = props => {
                 name = {props.name}
                 description = {props.description}
                 author = {props.author}
-                onClick = {props.onClick}
+                onClick = {handleToggleModal}
                 handleModalClose = {props.handleModalClose}
                 open={props.open}
             />
             <RecipeModal 
-                onClose={props.handleModalClose}
-                open={props.open}
+                onClose={handleToggleModal}
+                open={open}
                 recipeName={props.name}
                 image={props.image}
                 ingredients={props.ingredients}
+                // ingredients={newIngredients || props.ingredients}
                 steps={props.steps}
                 equipmentTable={props.equipmentTable}
+                cuisine={props.cuisine}
+                commentList={props.commentList}
+                likes={props.likes}
+                saved={props.saved}
             />
         </div>
         
