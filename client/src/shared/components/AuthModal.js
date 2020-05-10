@@ -11,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'top',
     justifyContent: 'center',
-    marginTop: "30px",
-    marginBottom: "20px",
+    height: "600px",
+    marginTop: "150px",
+    // marginBottom: "100px",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AuthModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  
 
   const handleOpen = () => {
     setOpen(true);

@@ -18,21 +18,9 @@ import {AuthContext} from './shared/context/auth-context';
 import "./App.css"
 import NewRecipe from './recipes/containers/NewRecipe';
 import Auth from './shared/components/Auth';
+import UserRecipes from './recipes/containers/UserRecipes';
 
 const App = () => {
-
-  // const filteredRecipes = [];
-
-  // const filters = ["bread flour", "water"]
-
-  // RECIPES.forEach(recipe => {
-  //   const filteredIngredients = ingredients.filter(ingr => filters.includes(ingr.ingredient));
-
-  //   if (filteredIngredients.length) {
-  //     filteredRecipes.push(recipe);
-  //   }
-  // })
-
 
   const RECIPES = [
     {
@@ -757,29 +745,79 @@ const App = () => {
       ]
     }
 
-  //====FINDING THE RECIPES BASED ON USERNAME===================================================
-  // const usernameFilter = "darylsuharli";
+  const [token, setToken] = useState(false);
+  const [userId, setUserId] = useState(false);
 
-  // const userRecipeFilteredList = USERS.filter((item) => {
-  //   return item.username.toLowerCase().includes(usernameFilter.toLowerCase())
-  // })
-  //============================================================================================
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
+  const login = useCallback((uid, token) => {
+    setToken(token);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
-    setIsLoggedIn(false);
+    setToken(null);
+    setUserId(null);
   }, []);
 
-  // console.log(RECIPES);
+  // // console.log(RECIPES);
+  // let routes;
+
+  // if (token) {
+  //   routes = (
+  //     <Switch>
+  //       <Route path="/" exact>
+  //         <Recipes RECIPES={RECIPES}/>
+  //       </Route>
+  //       {/* <Route path="/:userId/recipes" exact>
+  //         <UserPlaces />
+  //       </Route> */}
+  //       {/* <Route path="/recipes/new" exact>
+  //         <NewPlace />
+  //       </Route> */}
+  //       {/* <Route path="/recipes/:recipeId">
+  //         <UpdateRecipe />
+  //       </Route> */}
+  //       <Redirect to="/" />
+  //     </Switch>
+  //   );
+  // } else {
+  //   routes = (
+  //     <Switch>
+  //       <Route path="/" exact>
+  //         <Recipes RECIPES={RECIPES}/>
+  //       </Route>
+  //       {/* <Route path="/:userId/recipes" exact>
+  //         <UserPlaces />
+  //       </Route> */}
+  //       <Route path="/auth">
+  //         <Auth />
+  //       </Route>
+  //       <Redirect to="/auth" />
+  //     </Switch>
+  //   );
+  // }
+
+  // return (
+  //   <AuthContext.Provider
+  //     value={{
+  //       isLoggedIn: isLoggedIn,
+  //       userId: userId,
+  //       login: login,
+  //       logout: logout
+  //     }}
+  //   >
+  //     <Router>
+  //       <MainNavigation />
+  //       <main>{routes}</main>
+  //     </Router>
+  //   </AuthContext.Provider>
+  // );
+
 
   return (
     <AuthContext.Provider value={{
-      isLoggedIn: isLoggedIn,
+      isLoggedIn: !!token,
+      token: token,
+      userId: userId,
       login: login,
       logout: logout
     }}>
@@ -806,6 +844,9 @@ const App = () => {
               </Route>
               <Route path="/users" exact>
                 <Users />
+              </Route>
+              <Route path="/:userId/recipes" exact>
+                <UserRecipes />
               </Route>
               <Route path="/login" exact>
                 <Auth />

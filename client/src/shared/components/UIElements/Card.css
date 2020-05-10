@@ -6,9 +6,14 @@
     border-radius: 25px;
   }
 
-  img {
+  .card-image {
     border-radius: 20px; 
+    /* width: 400px;
+    height: 200px */
+    object-fit: cover;
+
     width: 400px;
+    height: 337px;
   }
   
   /* Bottom left text */

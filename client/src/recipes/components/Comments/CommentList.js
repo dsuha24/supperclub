@@ -44,7 +44,7 @@ const CommentList= props => {
     return (
         <div>
             <h2>Comments</h2>
-            {props.commentList.map(c => (
+            {/* {props.commentList.map(c => (
             <RecipeComments
                 key={c.key}
                 cid={c.cid}
@@ -54,7 +54,7 @@ const CommentList= props => {
                 commentDate={c.commentDate}
                 replies={c.replies}
             />
-          ))} 
+          ))}  */}
         </div>
     );
 }

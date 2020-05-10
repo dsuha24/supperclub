@@ -6,7 +6,7 @@ import './RecipeInstructions.css';
 const RecipeInstructions = props => {
     
     return (
-        <div class="row recipe-instructions-container">
+        <div className="row recipe-instructions-container">
             <div className="comment-column left">
                 <button>Save Recipe </button>
                 <CommentSection 

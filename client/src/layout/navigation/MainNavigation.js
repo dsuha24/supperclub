@@ -309,15 +309,15 @@ export default function MainNavigation() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton 
-              color="inherit"
-              onClick={handleNewRecipeOpen}
-            >
-              Add New Recipe
-              <AddCircleIcon />
-            </IconButton>
             {auth.isLoggedIn && (
               <div>
+                <IconButton 
+                  color="inherit"
+                  onClick={handleNewRecipeOpen}
+                >
+                  Add New Recipe
+                  <AddCircleIcon />
+                </IconButton>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
                     <MailIcon />

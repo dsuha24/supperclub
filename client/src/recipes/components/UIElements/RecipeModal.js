@@ -51,9 +51,9 @@ export default function RecipeModal(props) {
               steps={props.steps}
               equipmentTable={props.equipmentTable}
               cuisine={props.cuisine}
-              commentList={props.commentList}
-              likes={props.likes}
-              saved={props.saved}
+              // commentList={props.commentList}
+              // likes={props.likes}
+              // saved={props.saved}
             />
           </div>
         </Fade>

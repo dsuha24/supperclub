@@ -5,3 +5,8 @@
 .recipe-profile-link {
    font-size: small; 
 }
+
+.recipe-overview-image {
+    border-radius: 20px; 
+    width: 400px;
+}

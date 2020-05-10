@@ -1,5 +1,7 @@
-import React from 'react';
-
+import React, {useEffect, useState} from "react";
+// import { response } from "express";
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import RecipeList from '../components/RecipeList';
 // import RecipeModal from '../components/UIElements/RecipeModal';
 import FilterBar from '../../layout/navigation/Filters/FilterBar';
@@ -15,24 +17,34 @@ const Recipes = props => {
   const [filterIngredientArray, handleIngredientFilter] = React.useState([]);
   const [filterEquipmentArray, handleEquipmentFilter] = React.useState([]);
 
-  // const filteredRecipes = RECIPES.filter((item) => {
-  //   // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
-  //   if(filterArray.length === 0) {
-  //     return item;
+  // for getting data
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const [LoadedRecipes, setLoadedRecipes] = useState();
+
+  let filteredRecipes;
+  if(typeof LoadedRecipes !== "undefined") {
+    filteredRecipes = LoadedRecipes.filter((item) => {
+      // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
+      if(filterCuisineArray.length === 0) {
+        return item;
+      }
+      console.log("item.cuisine", item.cuisine)
+      return filterCuisineArray.includes(item.cuisine);
+    
+    })
+  }
+  
+
+  // const filteredCuisineRecipes = RECIPES.filter(({ cuisine }) => {
+    
+  //   if(filterCuisineArray.length === 0){
+  //     return cuisine;
   //   }
-  //   return filterArray.includes(item.cuisine);
-    
-  // })
+  //   const filteredCuisines = cuisine.filter(cuis => filterCuisineArray.includes(cuis.title));
 
-  const filteredCuisineRecipes = RECIPES.filter(({ cuisine }) => {
-    
-    if(filterCuisineArray.length === 0){
-      return cuisine;
-    }
-    const filteredCuisines = cuisine.filter(cuis => filterCuisineArray.includes(cuis.title));
-
-    return filteredCuisines.length;
-  });
+  //   return filteredCuisines.length;
+  // });
 
 
   const filteredIngredientRecipes = RECIPES.filter(({ ingredients }) => {
@@ -57,37 +69,62 @@ const Recipes = props => {
 
   // console.log(filterCuisineArray);
 
+
+  //get the recipes array from db
+  useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://localhost:5000/api/recipes');
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+        console.log(responseData.recipes);
+        setLoadedRecipes(responseData.recipes);
+      } catch (err) {
+        setError(err.message);
+      }
+      setIsLoading(false);
+    };
+    sendRequest();
+  }, []);
+
+  console.log("loadedRecipes:", LoadedRecipes);
+
+  const errorHandler = () => {
+      setError(null);
+  };
+
   return (
     <div className="main-recipe-page">
+      <ErrorModal error={error} onClear={errorHandler}/>
+      {isLoading && (
+          <div className="center">
+              <LoadingSpinner />
+          </div>)}
       <FilterBar 
         //getting data from child
         handleCuisineFilter={handleCuisineFilter}
         handleIngredientFilter={handleIngredientFilter}
         handleEquipmentFilter={handleEquipmentFilter}
       />
+      <br></br>
       <div>
+      {!isLoading && LoadedRecipes && (
         <RecipeList 
-          items = {filteredCuisineRecipes}
+          // items = {RECIPES}
+          items = {filteredRecipes}
+          // items = {LoadedRecipes}
           // items = {filteredIngredientRecipes}
-          // items = {filteredEquipmentRecipes}
-          // items={RECIPES} 
-          // onItemclick={handleModalOpen} 
-          // open={open} 
-          // handleModalClose={handleModalClose}
+          // items = {filteredEquipmentRecipes} 
         >
           {/* <RecipeModal /> */}
         </RecipeList>
+      )}
       </div>
-      <br></br>
-      {/* <RecipeModal onClose={handleModalClose} open={open}/> */}
-      {/* <h1>Trending</h1>
-      <div>
-        <RecipeList items={RECIPES} />
-      </div>
-      <h1>Best recipes of the month</h1>
-      <div>
-        <RecipeList items={RECIPES} />
-      </div> */}
     </div>
   );
 };

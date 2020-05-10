@@ -19,7 +19,7 @@ const OverviewSection = props => {
             </div>
             <p>likes: {props.likes}</p>
             <p>saved: {props.saved}</p>
-            <img src={props.image} alt={props.image} />
+            <img className="recipe-overview-image" src={props.image} alt={props.image} />
         </div>
         
     );

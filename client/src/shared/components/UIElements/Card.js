@@ -9,12 +9,13 @@ export default function Card(props) {
 
   return (
     <React.Fragment>
-      <div class="container" onClick={props.onClick}>
-        <img src={props.image} alt={props.name}/>
-        <div class="bottom-left">{props.name}</div>
-        <div class="bottom-left-sub">{props.author}</div>
-        <div class="top-right"><FavoriteBorderIcon /></div>
-        <div class="bottom-right"><SettingsOverscanIcon /></div>
+      <div className="container" onClick={props.onClick}>
+        <img className="card-image" src={`http://localhost:5000/${props.image}`} alt={props.name}/>
+        {/* <img src={props.image} alt={props.name}/> */}
+        <div className="bottom-left">{props.name}</div>
+        <div className="bottom-left-sub">{props.author}</div>
+        <div className="top-right"><FavoriteBorderIcon /></div>
+        <div className="bottom-right"><SettingsOverscanIcon /></div>
       </div>
       {/* <RecipeModal
         onClose={props.handleModalClose}

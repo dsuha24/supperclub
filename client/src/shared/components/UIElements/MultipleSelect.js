@@ -49,12 +49,17 @@ function getStyles(cuisine, personName, theme) {
 }
 
 export default function MultipleSelect(props) {
+
+  const {setCuisineValue} = props;
+
   const classes = useStyles();
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
+    // setCuisineValue(event.target.value);
+    console.log(event.target.value);
   };
 
   return (

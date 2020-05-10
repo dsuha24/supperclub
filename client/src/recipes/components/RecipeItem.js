@@ -32,14 +32,13 @@ const RecipeItem = props => {
     // return(
     //     {!inputOn ? <div></div> : <input onChange={handleChange}>}
 
-    // console.log(props.cuisine)
-
     return(
         <div>
             <Card 
                 image = {props.image}
+                // image={`http://localhost:5000/${props.image}`}
                 name = {props.name}
-                description = {props.description}
+                // description = {props.description}
                 author = {props.author}
                 onClick = {handleToggleModal}
                 handleModalClose = {props.handleModalClose}
@@ -49,15 +48,16 @@ const RecipeItem = props => {
                 onClose={handleToggleModal}
                 open={open}
                 recipeName={props.name}
-                image={props.image}
+                // image={props.image}
+                image={`http://localhost:5000/${props.image}`}
                 ingredients={props.ingredients}
                 // ingredients={newIngredients || props.ingredients}
                 steps={props.steps}
                 equipmentTable={props.equipmentTable}
                 cuisine={props.cuisine}
-                commentList={props.commentList}
-                likes={props.likes}
-                saved={props.saved}
+                // commentList={props.commentList}
+                // likes={props.likes}
+                // saved={props.saved}
             />
         </div>
         
