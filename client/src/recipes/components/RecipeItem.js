@@ -55,6 +55,8 @@ const RecipeItem = props => {
                 steps={props.steps}
                 equipmentTable={props.equipmentTable}
                 cuisine={props.cuisine}
+                authorId={props.authorId}
+                author={props.author}
                 // commentList={props.commentList}
                 // likes={props.likes}
                 // saved={props.saved}

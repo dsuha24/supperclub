@@ -1,6 +1,4 @@
-.overview-section {
-    /* background-color: violet; */
-}
+
 
 .recipe-profile-link {
    font-size: small; 
@@ -10,3 +8,8 @@
     border-radius: 20px; 
     width: 400px;
 }
+
+/* .cuisine-button {
+    border-radius: 12px;
+    background-color: yellow;
+} */

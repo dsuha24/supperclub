@@ -2,6 +2,7 @@ import React from 'react';
 import CommentSection from '../components/Comments/CommentSection';
 import InstructionSection from '../components/InstructionSection';
 import './RecipeInstructions.css';
+import { useParams } from 'react-router-dom';
 
 const RecipeInstructions = props => {
     
@@ -23,6 +24,8 @@ const RecipeInstructions = props => {
                     equipmentTable={props.equipmentTable}
                     likes={props.likes}
                     saved={props.saved}
+                    authorId={props.authorId}
+                    author={props.author}
                 />
             </div>
         </div>

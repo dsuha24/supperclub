@@ -829,9 +829,9 @@ const App = () => {
               <Route path="/" exact>
                 <Recipes RECIPES={RECIPES}/>
               </Route>
-              <Route path="/recipeinstruction" exact>
+              {/* <Route path="/:recipeId" exact>
                 <RecipeInstructions />
-              </Route>
+              </Route> */}
               <Route path="/uid" exact>
                 <UserProfile 
                   USERS={USERS}
@@ -842,10 +842,10 @@ const App = () => {
               <Route path="/newrecipe" exact>
                 <NewRecipe />
               </Route>
-              <Route path="/users" exact>
+              <Route path="/chefs" exact>
                 <Users />
               </Route>
-              <Route path="/:userId/recipes" exact>
+              <Route path="/chefs/:userId" exact>
                 <UserRecipes />
               </Route>
               <Route path="/login" exact>

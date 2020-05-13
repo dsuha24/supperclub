@@ -1,19 +1,23 @@
 import React from 'react';
 import './OverviewSection.css';
 import { Link } from 'react-router-dom';
+import Button from '../../../shared/components/FormElements/Button';
 
 const OverviewSection = props => {
     return (
         <div className="overview-section">
             <h1>{props.recipeName}</h1>
             {props.cuisine.map(c => (
-                <button>
-                    {c.title}
-                </button>
+                // <button className="cuisine-button">
+                //     {c}
+                // </button>
+                <Button className="cuisine-button" variant="contained">
+                    {c}
+                </Button>
             ))}
             <div className="recipe-profile-link">
-                <Link to="/uid">
-                    Author (clicking will link to profile)
+                <Link to={`/chefs/${props.authorId}/`}>
+                    {props.author}
                 </Link>
                 <p>number of user points</p>
             </div>

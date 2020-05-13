@@ -1,54 +1,96 @@
-import React, {useEffect, useState} from "react";
-// import { response } from "express";
-// import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-// import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import React, { useEffect, useState } from 'react';
 
-const Users = props => {
+import UsersList from '../components/UsersList';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [error, setError] = useState();
-    // const [loadedUsers, setLoadedUsers] = useState();
+const Users = () => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState();
 
-    // //get the users array from db
-    // useEffect(() => {
-    //     const sendRequest = async () => {
-    //         setIsLoading(true);
-    //         try {
-    //             const response = await fetch('http://localhost:5000/api/users');
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/users'
+        );
 
-    //             const responseData = await response.json();
+        setLoadedUsers(responseData.users);
+      } catch (err) {}
+    };
+    fetchUsers();
+  }, [sendRequest]);
 
-    //             if(!responseData.ok) {
-    //                 throw new Error(responseData.message);
-    //             }
-
-    //             setLoadedUsers(responseData.users);
-    //             setIsLoading(false);
-
-    //         } catch (err) {
-    //             setError(err.message);
-    //         }
-    //         setIsLoading(false);
-            
-    //     };
-    //     sendRequest();
-    // }, []);
-
-    // const errorHandler = () => {
-    //     setError(null);
-    // };
-
-    return (
-        <div>
-            {/* <ErrorModal error={error} onClear={errorHandler}/>
-            {isLoading && (
-                <div className="center">
-                    <LoadingSpinner />
-                </div>)} */}
-            <h1>Users</h1>
-            {/* {!isLoading && loadedUsers && <h2>{loadedUsers}</h2>} */}
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
         </div>
-    );
-}
+      )}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
+    </React.Fragment>
+  );
+};
 
 export default Users;
+
+
+
+
+// import React, {useEffect, useState} from "react";
+// // import { response } from "express";
+// // import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+// // import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+
+// const Users = props => {
+
+//     // const [isLoading, setIsLoading] = useState(false);
+//     // const [error, setError] = useState();
+//     // const [loadedUsers, setLoadedUsers] = useState();
+
+//     // //get the users array from db
+//     // useEffect(() => {
+//     //     const sendRequest = async () => {
+//     //         setIsLoading(true);
+//     //         try {
+//     //             const response = await fetch('http://localhost:5000/api/users');
+
+//     //             const responseData = await response.json();
+
+//     //             if(!responseData.ok) {
+//     //                 throw new Error(responseData.message);
+//     //             }
+
+//     //             setLoadedUsers(responseData.users);
+//     //             setIsLoading(false);
+
+//     //         } catch (err) {
+//     //             setError(err.message);
+//     //         }
+//     //         setIsLoading(false);
+            
+//     //     };
+//     //     sendRequest();
+//     // }, []);
+
+//     // const errorHandler = () => {
+//     //     setError(null);
+//     // };
+
+//     return (
+//         <div>
+//             {/* <ErrorModal error={error} onClear={errorHandler}/>
+//             {isLoading && (
+//                 <div className="center">
+//                     <LoadingSpinner />
+//                 </div>)} */}
+//             <h1>Users</h1>
+//             {/* {!isLoading && loadedUsers && <h2>{loadedUsers}</h2>} */}
+//         </div>
+//     );
+// }
+
+// export default Users;

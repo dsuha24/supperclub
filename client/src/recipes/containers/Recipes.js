@@ -22,16 +22,20 @@ const Recipes = props => {
   const [error, setError] = useState();
   const [LoadedRecipes, setLoadedRecipes] = useState();
 
-  let filteredRecipes;
+  // let cuisineFilter = ["French"];
+
+  var filteredRecipes = [];
   if(typeof LoadedRecipes !== "undefined") {
-    filteredRecipes = LoadedRecipes.filter((item) => {
+    filteredRecipes = LoadedRecipes.filter((cuis) => {
       // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
       if(filterCuisineArray.length === 0) {
-        return item;
+        return cuis;
       }
-      console.log("item.cuisine", item.cuisine)
-      return filterCuisineArray.includes(item.cuisine);
-    
+      console.log("item.cuisine", cuis.cuisine);
+      console.log("filterCuisineArray", filterCuisineArray);
+      console.log("filteredRecipes", filteredRecipes);
+      // return filterCuisineArray.includes(cuis.cuisine);
+      return cuis.cuisine.includes(filterCuisineArray)
     })
   }
   
@@ -82,7 +86,7 @@ const Recipes = props => {
         if (!response.ok) {
           throw new Error(responseData.message);
         }
-        console.log(responseData.recipes);
+        // console.log(responseData.recipes);
         setLoadedRecipes(responseData.recipes);
       } catch (err) {
         setError(err.message);
@@ -92,7 +96,7 @@ const Recipes = props => {
     sendRequest();
   }, []);
 
-  console.log("loadedRecipes:", LoadedRecipes);
+  // console.log("loadedRecipes:", LoadedRecipes);
 
   const errorHandler = () => {
       setError(null);

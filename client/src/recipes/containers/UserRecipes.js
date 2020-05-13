@@ -9,11 +9,28 @@ import RecipeList from '../components/RecipeList';
 const UserRecipes = () => {
   const [loadedRecipes, setLoadedRecipes] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState();
 
   const userId = useParams().userId;
 
+  // //get user info by id
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         `http://localhost:5000/api/users/${userId}`
+  //       );
+
+  //       setLoadedUsers(responseData.user);
+  //     } catch (err) {}
+  //   };
+  //   fetchUsers();
+  //   console.log("loadedUser", loadedUsers);
+  // }, [sendRequest]);
+
+  //get recipes by id
   useEffect(() => {
-    const fetchPlaces = async () => {
+    const fetchRecipes = async () => {
       try {
         const responseData = await sendRequest(
           `http://localhost:5000/api/recipes/user/${userId}`
@@ -21,7 +38,7 @@ const UserRecipes = () => {
         setLoadedRecipes(responseData.recipes);
       } catch (err) {}
     };
-    fetchPlaces();
+    fetchRecipes();
   }, [sendRequest, userId]);
 
   return (
@@ -33,6 +50,7 @@ const UserRecipes = () => {
         </div>
       )}
       {!isLoading && loadedRecipes && <RecipeList items={loadedRecipes} />}
+      {/* <h1>{loadedUsers.}</h1> */}
     </React.Fragment>
   );
 };

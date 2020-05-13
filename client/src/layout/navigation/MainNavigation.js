@@ -30,7 +30,7 @@ import Fade from '@material-ui/core/Fade';
 // import { Drawer } from '@material-ui/core';
 
 import {AuthContext} from '../../shared/context/auth-context';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -309,6 +309,14 @@ export default function MainNavigation() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <IconButton 
+              color="inherit"
+              // onClick={handleNewRecipeOpen}
+            >
+              <Link to="/chefs">
+                Chefs
+              </Link>
+            </IconButton>
             {auth.isLoggedIn && (
               <div>
                 <IconButton 

@@ -124,6 +124,33 @@ const CUISINES = [
           list={CUISINES}
           setCuisineValues={setCuisineValues}
         />
+        {/* <Input
+          id="ingredient1"
+          element="input"
+          type="text"
+          label="Ingredient"
+          // validators={[VALIDATOR_MINLENGTH(5)]}
+          // errorText="Please enter a valid ingredient (at least 5 characters)."
+          onInput={inputHandler}
+        />
+        <Input
+          id="ingredientQty1"
+          element="input"
+          type="text"
+          label="Amount"
+          // validators={[VALIDATOR_MINLENGTH(5)]}
+          // errorText="Please enter a valid ingredient (at least 5 characters)."
+          onInput={inputHandler}
+        />
+        <Input
+          id="ingredientUnits1"
+          element="input"
+          type="text"
+          label="Units"
+          // validators={[VALIDATOR_MINLENGTH(5)]}
+          // errorText="Please enter a valid ingredient (at least 5 characters)."
+          onInput={inputHandler}
+        /> */}
         <Button type="submit" disabled={!formState.isValid}>
           ADD RECIPE
         </Button>
