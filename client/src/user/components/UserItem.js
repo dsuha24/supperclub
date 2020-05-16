@@ -12,11 +12,12 @@ const UserItem = props => {
       <UserCard className="user-item__content">
         <Link to={`/chefs/${props.id}/`}>
           <div className="user-item__image">
-            <Avatar image={`http://localhost:5000/${props.image}`} alt={props.name} />
+            <Avatar image={process.env.REACT_APP_ASSET_URL + `${props.image}`} alt={props.name} />
           </div>
           <div className="user-item__info">
             <h2>{props.name}</h2>
             <h3>
+              14.6k points
               {/* {props.placeCount} {props.placeCount === 1 ? 'Place' : 'Places'} */}
             </h3>
           </div>

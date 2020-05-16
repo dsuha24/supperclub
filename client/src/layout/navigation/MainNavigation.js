@@ -289,7 +289,7 @@ export default function MainNavigation() {
           >
             <FilterListIcon />
           </IconButton>
-          <NavLink to="/">
+          <NavLink className="header-link" to="/">
             <Typography className={classes.title} variant="h6" noWrap>
               Supper Club
             </Typography>
@@ -313,7 +313,7 @@ export default function MainNavigation() {
               color="inherit"
               // onClick={handleNewRecipeOpen}
             >
-              <Link to="/chefs">
+              <Link className="header-link" to="/chefs">
                 Chefs
               </Link>
             </IconButton>

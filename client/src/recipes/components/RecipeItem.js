@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../../shared/components/UIElements/Card';
 
 import RecipeModal from './UIElements/RecipeModal';
+import './RecipeItem.css'
 
 const RecipeItem = props => {
     const [open, toggleModal] = React.useState(false);
@@ -34,7 +35,7 @@ const RecipeItem = props => {
 
     return(
         <div>
-            <Card 
+            <Card
                 image = {props.image}
                 // image={`http://localhost:5000/${props.image}`}
                 name = {props.name}
@@ -49,7 +50,8 @@ const RecipeItem = props => {
                 open={open}
                 recipeName={props.name}
                 // image={props.image}
-                image={`http://localhost:5000/${props.image}`}
+                // image={`http://localhost:5000/${props.image}`}
+                image={process.env.REACT_APP_ASSET_URL+`${props.image}`}
                 ingredients={props.ingredients}
                 // ingredients={newIngredients || props.ingredients}
                 steps={props.steps}

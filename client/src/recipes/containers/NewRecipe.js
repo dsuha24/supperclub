@@ -73,7 +73,8 @@ const CUISINES = [
       formData.append('cuisine', cuisineVal);
       
       await sendRequest(
-        'http://localhost:5000/api/recipes',
+        // 'http://localhost:5000/api/recipes',
+        process.env.REACT_APP_BACKEND_URL + '/recipes',
         'POST',
         formData, {
           Authorization: 'Bearer ' + auth.token

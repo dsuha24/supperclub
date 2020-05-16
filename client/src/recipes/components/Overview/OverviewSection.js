@@ -2,6 +2,7 @@ import React from 'react';
 import './OverviewSection.css';
 import { Link } from 'react-router-dom';
 import Button from '../../../shared/components/FormElements/Button';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const OverviewSection = props => {
     return (
@@ -19,10 +20,10 @@ const OverviewSection = props => {
                 <Link to={`/chefs/${props.authorId}/`}>
                     {props.author}
                 </Link>
-                <p>number of user points</p>
+                {/* <p>number of user points</p> */}
             </div>
-            <p>likes: {props.likes}</p>
-            <p>saved: {props.saved}</p>
+            <p><FavoriteBorderIcon /> 745{props.likes}</p>
+            {/* <p>saved: {props.saved}</p> */}
             <img className="recipe-overview-image" src={props.image} alt={props.image} />
         </div>
         

@@ -23,8 +23,7 @@ export default function RecipeList(props) {
 
   return (
     <Grid container className={classes.root} spacing={2}>
-      {/* <Grid container justify="left" wrap="nowrap"> */}
-      <Grid container justify="left">
+      <Grid container justify="center" spacing={2}>
         {props.items.map(recipe => (
           <RecipeItem
               onClick={props.onItemclick}

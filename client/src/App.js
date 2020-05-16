@@ -87,19 +87,19 @@ const App = () => {
       ingredients: [
         {
             ingredient: 'Bread Flour',
-            amount: 3,
+            quantity: 3,
             units: 'Cups',
             subs: '3'
         },
         {
             ingredient: 'Instant Yeast',
-            amount: '1/3',
+            quantity: '1/3',
             units: 'Tsp',
             subs: 2
         },
         {
             ingredient: 'Euro Butter',
-            amount: 1,
+            quantity: 1,
             units: 'Cups',
             subs: 1
         }
