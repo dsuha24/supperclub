@@ -99,7 +99,7 @@ const UserRecipes = () => {
                     </TableRow>
                     <TableRow>
                       <TableCell align="right">Recipes</TableCell>
-                      <TableCell align="left">2</TableCell>
+                      <TableCell align="left">{loadedUser.recipes.length}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell align="right">Citations</TableCell>

@@ -9,7 +9,7 @@ const StepSection = props => {
                 <div>
                     <h1>Step {steps.step}: {steps.shortDescription}</h1>
                     <p>{steps.longDescription}</p>
-                    <img src={steps.image} alt={steps.image} />
+                    <img className="step_image" src={steps.image} alt={steps.image} />
                     <h3>Ingredients</h3>
                     <h5>{steps.ingredients}</h5>
                 </div>

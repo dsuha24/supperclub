@@ -23,22 +23,7 @@ const Recipes = props => {
   const [LoadedRecipes, setLoadedRecipes] = useState();
 
   // let cuisineFilter = ["French"];
-
-  var filteredRecipes = [];
-  if(typeof LoadedRecipes !== "undefined") {
-    filteredRecipes = LoadedRecipes.filter((cuis) => {
-      // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
-      if(filterCuisineArray.length === 0) {
-        return cuis;
-      }
-      console.log("item.cuisine", cuis.cuisine);
-      console.log("filterCuisineArray", filterCuisineArray);
-      console.log("filteredRecipes", filteredRecipes);
-      // return filterCuisineArray.includes(cuis.cuisine);
-      return cuis.cuisine.includes(filterCuisineArray)
-    })
-  }
-  
+ 
 
   // const filteredCuisineRecipes = RECIPES.filter(({ cuisine }) => {
     
@@ -96,6 +81,22 @@ const Recipes = props => {
     };
     sendRequest();
   }, []);
+
+  let filteredRecipes = [];
+  if(typeof LoadedRecipes !== "undefined") {
+    filteredRecipes = LoadedRecipes.filter((cuis) => {
+      // return item.cuisine.toLowerCase().includes(cuisineList.toLowerCase())
+      if(filterCuisineArray.length === 0) {
+        return cuis;
+      }
+      console.log("LoadedRecipes", LoadedRecipes);
+      console.log("item.cuisine", cuis.cuisine);
+      console.log("filterCuisineArray", filterCuisineArray);
+      console.log("filteredRecipes", filteredRecipes);
+      return filterCuisineArray.includes(cuis.cuisine);
+      // return cuis.cuisine.includes(filterCuisineArray)
+    })
+  }
 
   // console.log("loadedRecipes:", LoadedRecipes);
 

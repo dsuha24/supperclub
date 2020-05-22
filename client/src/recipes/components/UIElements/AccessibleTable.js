@@ -37,7 +37,7 @@ export default function AcccessibleTable(props) {
               <TableCell component="th" scope="row">
                 {row.ingredient}
               </TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">{row.units}</TableCell>
               <TableCell align="right">{row.subs}</TableCell>
             </TableRow>

@@ -1,3 +1,6 @@
+// REACT_APP_BACKEND_URL=https://supper-club.herokuapp.com/api
+// REACT_APP_ASSET_URL=https://supper-club.herokuapp.com/
+
 import React, {useState, useCallback} from 'react';
 import {
   BrowserRouter as Router,

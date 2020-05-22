@@ -8,3 +8,14 @@
     border-radius: 6px;
     background: white;
 }
+
+.ingredient-row {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+.block {
+    width: 100px;
+    display: inline-block;
+    margin: 0 auto;
+}

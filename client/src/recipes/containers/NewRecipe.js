@@ -61,8 +61,12 @@ const CUISINES = [
   const placeSubmitHandler = async event => {
     event.preventDefault();
     const cuisineVal = ["Italian"];
-    console.log("image", formState.inputs);
+
+    console.log("inputs", formState.inputs);
+    console.log("stepImage1", formState.inputs.stepImage1.value);
     // console.log("title", formState.inputs.title.value); 
+    // console.log("formState.inputs.ingredients1.value", formState.inputs.ingredient1.value)
+
     try {
       const formData = new FormData();
       formData.append('recipeName', formState.inputs.title.value);
@@ -71,6 +75,18 @@ const CUISINES = [
       formData.append('author', "Daryl Suharli")
       formData.append('authorId', auth.userId);
       formData.append('cuisine', cuisineVal);
+      // formData.append('ingredients', ingredientsArray1); //issues sending an array
+      formData.append('ingredient1', formState.inputs.ingredient1.value);
+      formData.append('ingredientQty1', formState.inputs.ingredientQty1.value);
+      formData.append('ingredientUnits1', formState.inputs.ingredientUnits1.value);
+
+      formData.append('ingredient2', formState.inputs.ingredient2.value);
+      formData.append('ingredientQty2', formState.inputs.ingredientQty2.value);
+      formData.append('ingredientUnits2', formState.inputs.ingredientUnits2.value);
+
+      formData.append('equipment1', formState.inputs.equipment1.value);
+
+      formData.append('stepImage1', formState.inputs.stepImage1.value);
       
       await sendRequest(
         // 'http://localhost:5000/api/recipes',
@@ -79,16 +95,6 @@ const CUISINES = [
         formData, {
           Authorization: 'Bearer ' + auth.token
         }
-        // JSON.stringify({
-        //   recipeName: formState.inputs.title.value,
-        //   // cuisine: data.cuisine,
-        //   description: formState.inputs.description.value,
-        //   image: "https://media.daysoftheyear.com/20171223132649/kouign-amann-day.jpg",
-        //   author: "Daryl Suharli",
-        //   // authorId: "5eaf1a21467b2f4eb88d9e7b",
-        //   authorId: auth.userId
-        // }),
-        // { 'Content-Type': 'application/json' }
       );
       history.push('/');
     } catch (err) {}
@@ -125,33 +131,94 @@ const CUISINES = [
           list={CUISINES}
           setCuisineValues={setCuisineValues}
         />
-        {/* <Input
-          id="ingredient1"
+        <div className="ingredient-row">
+          <div className="block">
+            <Input
+              id="ingredient1"
+              element="input"
+              type="text"
+              label="Ingredient 1"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid ingredient."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="block">
+            <Input
+              id="ingredientQty1"
+              element="input"
+              type="number"
+              label="Amount"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid amount."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="block">
+            <Input
+              id="ingredientUnits1"
+              element="input"
+              type="text"
+              label="Units"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid unit."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="block">
+          </div>
+        </div>
+        <div className="ingredient-row">
+          <div className="block">
+            <Input
+              id="ingredient2"
+              element="input"
+              type="text"
+              label="Ingredient 2"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid ingredient."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="block">
+            <Input
+              id="ingredientQty2"
+              element="input"
+              type="number"
+              label="Amount"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid amount."
+              onInput={inputHandler}
+            />
+          </div>
+          <div className="block">
+            <Input
+              id="ingredientUnits2"
+              element="input"
+              type="text"
+              label="Units"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter a valid unit."
+              onInput={inputHandler}
+            />
+          </div>
+        </div>
+        <h2>Equipment</h2>
+        <Input
+          id="equipment1"
           element="input"
           type="text"
-          label="Ingredient"
-          // validators={[VALIDATOR_MINLENGTH(5)]}
-          // errorText="Please enter a valid ingredient (at least 5 characters)."
+          label="Equipment"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid unit."
           onInput={inputHandler}
         />
-        <Input
-          id="ingredientQty1"
-          element="input"
-          type="text"
-          label="Amount"
-          // validators={[VALIDATOR_MINLENGTH(5)]}
-          // errorText="Please enter a valid ingredient (at least 5 characters)."
+        <h2>Steps</h2>
+        <ImageUpload 
+          id="stepImage1" 
           onInput={inputHandler}
+          errorText="Please provide an image for Step 1"
         />
-        <Input
-          id="ingredientUnits1"
-          element="input"
-          type="text"
-          label="Units"
-          // validators={[VALIDATOR_MINLENGTH(5)]}
-          // errorText="Please enter a valid ingredient (at least 5 characters)."
-          onInput={inputHandler}
-        /> */}
         <Button type="submit" disabled={!formState.isValid}>
           ADD RECIPE
         </Button>
