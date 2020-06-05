@@ -1,7 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import './index.css';
-import App from './App';
+// Components
+import { AppWrapper } from "./AppWrapper";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// CSS
+import "./index.css";
+
+// Utils
+import configureStore from "./stores";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const store = configureStore();
+    window.getState = store.getState;
+    ReactDOM.render(
+        <AppWrapper store={store} />,
+        document.getElementById("root")
+    );
+});
