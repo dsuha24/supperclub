@@ -13,6 +13,7 @@
     "emotion": "^10.0.27",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
+    "lodash": "^4.17.15",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",

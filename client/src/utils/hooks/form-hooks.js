@@ -1,21 +1,31 @@
 import { useReducer } from "react";
+import setWith from "lodash/setWith";
+import get from "lodash/get";
 
 function formReducer(state, action) {
     let newArray;
     switch (action.type) {
         case "ADD_ARRAY":
             const { name, defaultFields } = action;
-            newArray = [...state[name]];
-            newArray.push(defaultFields);
-            return { ...state, [name]: newArray };
+            const newArr = get(state, name);
+            newArr.push(defaultFields);
+            const newArrayState = { ...state };
+            setWith(newArrayState, name, newArr);
+            return { ...newArrayState };
         case "DELETE_ARRAY":
             const { id, arrayName } = action;
-            newArray = [...state[arrayName]];
-            newArray.splice(id, 1);
-            return { ...state, [arrayName]: newArray };
+            const deleteArray = get(state, arrayName);
+            deleteArray.splice(id, 1);
+            const newDeleteArray = { ...state };
+            setWith(newDeleteArray, arrayName, deleteArray);
+            // newArray = [...state[arrayName]];
+            // newArray.splice(id, 1);
+            return { ...newDeleteArray };
         case "EDIT_FIELD":
             const { field, value } = action;
-            return { ...state, [field]: value };
+            const newState = { ...state };
+            setWith(newState, field, value);
+            return { ...newState };
         default:
             throw new Error();
     }
@@ -40,11 +50,12 @@ export const useForm = (initialState) => {
         });
     }
 
-    function editField(field, value) {
+    function editField(field, e) {
+        e.preventDefault();
         dispatch({
             type: "EDIT_FIELD",
             field,
-            value,
+            value: e.target.value,
         });
     }
 
