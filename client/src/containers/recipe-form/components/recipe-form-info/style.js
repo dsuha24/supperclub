@@ -9,6 +9,7 @@ const RecipeBasicInfo = styled("div")`
 
         &__cuisine {
             margin-right: ${(props) => props.theme.spacing.tiny};
+            width: 60%;
         }
     }
 

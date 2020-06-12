@@ -10,7 +10,13 @@ const iconMap = {
     delete: DeleteIcon,
 };
 
-const Button = ({ type = "add", icon = false, size = "small", ...rest }) => {
+const Button = ({
+    type = "add",
+    icon = false,
+    className = "",
+    size = "small",
+    ...rest
+}) => {
     const IconType = iconMap[type];
     if (icon) {
         return (
@@ -19,7 +25,7 @@ const Button = ({ type = "add", icon = false, size = "small", ...rest }) => {
             </IconButton>
         );
     }
-    return <MaterialButton size={size} {...rest} />;
+    return <MaterialButton className={className} size={size} {...rest} />;
 };
 
 export default Button;

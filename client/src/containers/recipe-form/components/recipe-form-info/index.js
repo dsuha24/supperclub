@@ -3,6 +3,7 @@ import View from "./style";
 
 import Input from "../../../../components/input";
 import Button from "../../../../components/button";
+import ImageUplaod from "../../../../components/image-upload";
 import IngredientsForm from "../ingredients-form";
 import EquipmentForm from "../equipment-form";
 
@@ -34,7 +35,12 @@ const RecipeFormInfo = ({
                 onChange={(e) => editField("cuisine", e)}
                 label='Cuisine'
             />
-            <Input type='file' value={image} label='Image' />
+            <ImageUplaod
+                onInput={editField}
+                image={image}
+                id='image'
+                field='image'
+            />
         </div>
         <Input
             className='recipe-form-info__description'

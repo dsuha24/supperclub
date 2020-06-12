@@ -14,6 +14,7 @@ const EquipmentForm = ({
     labelName = "Equipment",
 }) => {
     const [equipmentState, handleEquipment] = useState("");
+    console.log(equipmentState);
     return (
         <View>
             <Input

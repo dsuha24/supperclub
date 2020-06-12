@@ -20,7 +20,7 @@ import Nav from "./components/nav";
 import Preview from "./components/preview";
 
 const RecipeForm = () => {
-    const [formTab, handleFormTab] = useState("instructions");
+    const [formTab, handleFormTab] = useState("info");
     const [formState, dispatch, pushArray, deleteArray, editField] = useForm(
         INITIAL_STATE
     );

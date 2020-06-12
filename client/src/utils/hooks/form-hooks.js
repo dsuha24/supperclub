@@ -7,7 +7,7 @@ function formReducer(state, action) {
     switch (action.type) {
         case "ADD_ARRAY":
             const { name, defaultFields } = action;
-            const newArr = get(state, name);
+            const newArr = [...get({ ...state }, name)];
             newArr.push(defaultFields);
             const newArrayState = { ...state };
             setWith(newArrayState, name, newArr);
@@ -50,12 +50,11 @@ export const useForm = (initialState) => {
         });
     }
 
-    function editField(field, e) {
-        e.preventDefault();
+    function editField(field, e, pickedFile) {
         dispatch({
             type: "EDIT_FIELD",
             field,
-            value: e.target.value,
+            value: pickedFile ? pickedFile : e.target.value,
         });
     }
 

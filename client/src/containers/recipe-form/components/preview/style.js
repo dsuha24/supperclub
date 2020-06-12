@@ -26,10 +26,15 @@ const Preview = styled("div")`
     }
 
     & .preview {
+        &__image-preview {
+            object-fit: contain;
+            max-height: 200px;
+        }
+
         &__image-holder {
             ${(props) => props.theme.helpers.flexCenter};
             height: 200px;
-            background: ${(props) => props.theme.color.brand};
+            border: 1px solid ${(props) => props.theme.color.secondary};
         }
 
         &__ingredient-container {
@@ -39,6 +44,18 @@ const Preview = styled("div")`
 
         &__quantity {
             display: flex;
+        }
+
+        &__steps {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__image {
+            max-height: 50px;
+            object-fit: contain;
         }
     }
 `;

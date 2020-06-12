@@ -9,7 +9,7 @@ const Input = ({
     variant = "outlined",
     onChange,
     placeholder = "",
-    fullWidth = "true",
+    fullWidth = true,
     ...props
 }) => (
     <TextField
