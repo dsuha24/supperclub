@@ -1,8 +1,0 @@
-{
-    "env": {
-        "DB_USER": "dsuharli",
-        "DB_PASSWORD": "0Q8PriUNdt6PVr60",
-        "DB_NAME": "recipes",
-        "JWT_KEY": "supersecret_dont_share"
-    }
-}
