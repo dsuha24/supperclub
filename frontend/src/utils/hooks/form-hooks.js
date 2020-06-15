@@ -3,6 +3,7 @@ import setWith from "lodash/setWith";
 import get from "lodash/get";
 
 function formReducer(state, action) {
+    debugger;
     switch (action.type) {
         case "ADD_ARRAY":
             const { name, defaultFields } = action;

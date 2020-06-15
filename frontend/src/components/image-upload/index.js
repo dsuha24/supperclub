@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
 
 // import Button from "../../clean/shared/components/FormElements/Button";
 import Button from "../button";
@@ -14,17 +15,29 @@ const ImageUpload = ({
     className = "",
     image,
 }) => {
-    const [file, setFile] = useState();
-
     const filePickerRef = useRef();
+    const [imageFile, handleImage] = useState();
+
+    useEffect(() => {
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+            axios
+                .post("http://localhost:5000/api/uploads", formData, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                })
+                .then((res) => {
+                    debugger;
+                    onInput(field, "", res.data["Location"]);
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [imageFile]);
 
     const pickedHandler = (event) => {
-        let pickedFile;
         if (event.target.files && event.target.files.length === 1) {
-            pickedFile = event.target.files[0];
-            setFile(pickedFile);
+            handleImage(event.target.files[0]);
         }
-        onInput(field, event, pickedFile);
     };
 
     const pickImageHandler = () => {

@@ -188,11 +188,9 @@ export default function MainNavigation() {
 
     const renderMenu = (
         <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            // anchorEl={anchorEl}
             id={menuId}
             keepMounted
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
             aria-labelledby='transition-modal-title'
             aria-describedby='transition-modal-description'
             open={isMenuOpen}
@@ -213,7 +211,7 @@ export default function MainNavigation() {
             <Drawer
                 // className={classes.drawer}
                 // variant="permanent"
-                anchorEl={anchorEl}
+                // anchorEl={anchorEl}
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}
                 id={filterMenuId}
                 keepMounted

@@ -15,7 +15,7 @@ import Preview from "./components/preview";
 
 const RecipeForm = () => {
     const [formTab, handleFormTab] = useState("info");
-    const [formState, pushArray, deleteArray, editField] = useForm(
+    const [formState, _, pushArray, deleteArray, editField] = useForm(
         INITIAL_STATE
     );
 

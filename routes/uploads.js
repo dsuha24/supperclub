@@ -1,12 +1,13 @@
 const AWS = require("aws-sdk");
 const BusBoy = require("busboy");
-
 const express = require("express");
 const { json } = require("body-parser");
 const router = express.Router();
 
 const { S3_KEYS } = require("../keys");
 const { BUCKET_NAME, IAM_USER_KEY, IAM_USER_SECRET } = S3_KEYS;
+
+const HttpError = require("../models/http-error");
 
 function uploadToS3(file, res) {
     let s3bucket = new AWS.S3({
@@ -20,10 +21,11 @@ function uploadToS3(file, res) {
 
         s3bucket.upload(params, (err, data) => {
             if (err) {
-                console.log("error in callback");
-                console.log(err);
+                console.error(err);
+                return;
             }
 
+            debugger;
             res.json(data);
         });
     });
@@ -31,12 +33,11 @@ function uploadToS3(file, res) {
 
 router.post("/", [], async (req, res, next) => {
     try {
-        const element1 = req.body.element1;
-
+        debugger;
         const busboy = new BusBoy({ headers: req.headers });
 
         busboy.on("finish", () => {
-            const file = req.files.element2;
+            const file = req.files.image;
 
             uploadToS3(file, res);
         });
