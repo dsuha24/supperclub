@@ -23,16 +23,14 @@ const ImageUpload = ({
             const formData = new FormData();
             formData.append("image", imageFile);
             axios
-                .post("http://localhost:5000/api/uploads", formData, {
+                .post("api/uploads", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 })
                 .then((res) => {
-                    debugger;
                     onInput(field, "", res.data["Location"]);
-                })
-                .catch((err) => console.log(err));
+                });
         }
-    }, [imageFile]);
+    }, [imageFile, field, onInput]);
 
     const pickedHandler = (event) => {
         if (event.target.files && event.target.files.length === 1) {
@@ -40,7 +38,8 @@ const ImageUpload = ({
         }
     };
 
-    const pickImageHandler = () => {
+    const pickImageHandler = (e) => {
+        e.preventDefault();
         filePickerRef.current.click();
     };
 

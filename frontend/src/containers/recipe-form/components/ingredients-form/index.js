@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import View from "./style";
 
 import Input from "../../../../components/input";
@@ -46,7 +46,7 @@ const IngredientsForm = ({
                         </div>
                         <div className='ingredients-form__buttons'>
                             <Button
-                                type='add'
+                                icon='add'
                                 disabled={Object.values(ingredientObject).some(
                                     (el) => el === ""
                                 )}
@@ -55,14 +55,12 @@ const IngredientsForm = ({
                                         ...INITIAL_INGREDIENT_STATE,
                                     })
                                 }
-                                icon={true}
                                 color='primary'
                             />
                             <Button
-                                type='delete'
+                                icon='delete'
                                 disabled={ingredients.length === 1}
                                 onClick={() => deleteArray("ingredients", i)}
-                                icon={true}
                                 color='secondary'
                             />
                         </div>

@@ -12,9 +12,19 @@ import configureStore from "./stores";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "emotion-theming";
 import { variables } from "./utils/styling/theme";
+import { setAuthToken } from "./utils/auth";
+import jwt_decode from "jwt-decode";
+import { receiveCurrentUser } from "./stores/actions/sessions";
+
+const store = configureStore();
+if (localStorage.jwtToken) {
+    // Set auth token header auth
+    setAuthToken(localStorage.jwtToken);
+    const decoded = jwt_decode(localStorage.jwtToken);
+    store.dispatch(receiveCurrentUser(decoded));
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const store = configureStore();
     window.getState = store.getState;
     ReactDOM.render(
         <Provider store={store}>

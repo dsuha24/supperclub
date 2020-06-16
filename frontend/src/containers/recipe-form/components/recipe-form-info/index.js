@@ -2,13 +2,9 @@ import React from "react";
 import View from "./style";
 
 import Input from "../../../../components/input";
-import Button from "../../../../components/button";
 import ImageUplaod from "../../../../components/image-upload";
 import IngredientsForm from "../ingredients-form";
 import EquipmentForm from "../equipment-form";
-
-// Utils
-import { INITIAL_INGREDIENT_STATE } from "../../utils";
 
 const RecipeFormInfo = ({
     editField,
@@ -36,8 +32,8 @@ const RecipeFormInfo = ({
                 label='Cuisine'
             />
             <ImageUplaod
-                onInput={editField}
                 image={image}
+                onInput={editField}
                 id='image'
                 field='image'
             />

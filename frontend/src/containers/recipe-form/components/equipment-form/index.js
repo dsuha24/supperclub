@@ -14,7 +14,6 @@ const EquipmentForm = ({
     labelName = "Equipment",
 }) => {
     const [equipmentState, handleEquipment] = useState("");
-    console.log(equipmentState);
     return (
         <View>
             <Input
@@ -33,7 +32,7 @@ const EquipmentForm = ({
                             }}
                             position='end'
                         >
-                            <Button type='add' icon={true} />
+                            <Button icon='add' />
                         </InputAdornment>
                     ),
                 }}

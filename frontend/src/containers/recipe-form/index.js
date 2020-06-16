@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import View from "./style";
+import { connect } from "react-redux";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import { useForm } from "../../utils/hooks/form-hooks";
 
@@ -13,11 +16,12 @@ import RecipeInstructions from "./components/recipe-instructions";
 import Nav from "./components/nav";
 import Preview from "./components/preview";
 
-const RecipeForm = () => {
+const RecipeForm = ({ userId }) => {
     const [formTab, handleFormTab] = useState("info");
-    const [formState, _, pushArray, deleteArray, editField] = useForm(
+    const { formState, pushArray, deleteArray, editField } = useForm(
         INITIAL_STATE
     );
+    const history = useHistory();
 
     const {
         title,
@@ -29,6 +33,21 @@ const RecipeForm = () => {
         steps,
     } = formState;
 
+    async function submit() {
+        const formData = new FormData();
+
+        Object.keys(formState).forEach((formKey) => {
+            formData.append(formKey, formState[formKey]);
+        });
+
+        axios
+            .post("api/recipes", formState)
+            .then((res) => {
+                history.push("/");
+            })
+            .catch((err) => console.log(err));
+    }
+
     return (
         <View formTab={formTab}>
             <div className='recipe-form__info'>
@@ -37,26 +56,28 @@ const RecipeForm = () => {
                     {formTab === "info" ? "Basic Information" : "Instructions"}
                 </h2>
                 <div className='recipe-form__form'>
-                    {isInfoTab(formTab) ? (
-                        <RecipeBasicInfo
-                            editField={editField}
-                            title={title}
-                            cuisine={cuisine}
-                            description={description}
-                            image={image}
-                            pushArray={pushArray}
-                            deleteArray={deleteArray}
-                            ingredients={ingredients}
-                            equipment={equipment}
-                        />
-                    ) : (
-                        <RecipeInstructions
-                            editField={editField}
-                            pushArray={pushArray}
-                            deleteArray={deleteArray}
-                            steps={steps}
-                        />
-                    )}
+                    <form onSubmit={submit}>
+                        {isInfoTab(formTab) ? (
+                            <RecipeBasicInfo
+                                editField={editField}
+                                title={title}
+                                cuisine={cuisine}
+                                description={description}
+                                image={image}
+                                pushArray={pushArray}
+                                deleteArray={deleteArray}
+                                ingredients={ingredients}
+                                equipment={equipment}
+                            />
+                        ) : (
+                            <RecipeInstructions
+                                editField={editField}
+                                pushArray={pushArray}
+                                deleteArray={deleteArray}
+                                steps={steps}
+                            />
+                        )}
+                    </form>
                 </div>
                 <div className='recipe-form__bottom-nav'>
                     <Button
@@ -74,9 +95,13 @@ const RecipeForm = () => {
                     </Button>
                 </div>
             </div>
-            <Preview formState={formState} />
+            <Preview formState={formState} submit={submit} />
         </View>
     );
 };
 
-export default RecipeForm;
+function mapStateToProps(state) {
+    return { userId: state.sessions.user.userId };
+}
+
+export default connect(mapStateToProps, {})(RecipeForm);

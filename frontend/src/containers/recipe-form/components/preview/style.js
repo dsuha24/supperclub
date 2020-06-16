@@ -26,6 +26,11 @@ const Preview = styled("div")`
     }
 
     & .preview {
+        &__wrapper {
+            max-height: 600px;
+            overflow-y: scroll;
+        }
+
         &__image-preview {
             object-fit: contain;
             max-height: 200px;

@@ -1,9 +1,8 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 import setWith from "lodash/setWith";
 import get from "lodash/get";
 
 function formReducer(state, action) {
-    debugger;
     switch (action.type) {
         case "ADD_ARRAY":
             const { name, defaultFields } = action;
@@ -32,31 +31,31 @@ function formReducer(state, action) {
 export const useForm = (initialState) => {
     const [formState, dispatch] = useReducer(formReducer, initialState);
 
-    function pushArray(arrayName, defaultFields) {
+    const pushArray = useCallback((arrayName, defaultFields) => {
         dispatch({
             type: "ADD_ARRAY",
             name: arrayName,
             defaultFields: defaultFields,
         });
-    }
+    }, []);
 
-    function deleteArray(arrayName, id) {
+    const deleteArray = useCallback((arrayName, id) => {
         dispatch({
             type: "DELETE_ARRAY",
             id,
             arrayName,
         });
-    }
+    }, []);
 
-    function editField(field, e, pickedFile) {
+    const editField = useCallback((field, e, pickedFile) => {
         dispatch({
             type: "EDIT_FIELD",
             field,
             value: pickedFile ? pickedFile : e.target.value,
         });
-    }
+    }, []);
 
-    return [formState, dispatch, pushArray, deleteArray, editField];
+    return { formState, pushArray, deleteArray, editField };
 };
 
 // import { useCallback, useReducer } from "react";

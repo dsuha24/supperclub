@@ -1,7 +1,4 @@
-// REACT_APP_BACKEND_URL=https://supper-club.herokuapp.com/api
-// REACT_APP_ASSET_URL=https://supper-club.herokuapp.com/
-
-import React, { useState, useCallback } from "react";
+import React from "react";
 import View from "./style";
 import {
     BrowserRouter as Router,
@@ -10,132 +7,46 @@ import {
     Switch,
 } from "react-router-dom";
 
-import MainNavigation from "../../clean/navigation/MainNavigation";
-//import Users from './user/pages/Users';
-// import Recipes from "./clean/recipes/containers/Recipes";
-// import RecipeInstructions from "./clean/recipes/containers/RecipeInstructions";
-// import UserProfile from "./clean/user/containers/UserProfile";
-// import Users from "./clean/user/containers/Users";
-
-import { AuthContext } from "../../clean/shared/context/auth-context";
 import NewRecipe from "../recipe-form";
+import Nav from "../../components/nav";
 import Auth from "../../clean/shared/components/Auth";
-// import UserRecipes from "./clean/recipes/containers/UserRecipes";
 
 const App = () => {
-    const [token, setToken] = useState(false);
-    const [userId, setUserId] = useState(false);
-
-    const login = useCallback((uid, token) => {
-        setToken(token);
-        setUserId(uid);
-    }, []);
-
-    const logout = useCallback(() => {
-        setToken(null);
-        setUserId(null);
-    }, []);
-
-    // // console.log(RECIPES);
-    // let routes;
-
-    // if (token) {
-    //   routes = (
-    //     <Switch>
-    //       <Route path="/" exact>
-    //         <Recipes RECIPES={RECIPES}/>
-    //       </Route>
-    //       {/* <Route path="/:userId/recipes" exact>
-    //         <UserPlaces />
-    //       </Route> */}
-    //       {/* <Route path="/recipes/new" exact>
-    //         <NewPlace />
-    //       </Route> */}
-    //       {/* <Route path="/recipes/:recipeId">
-    //         <UpdateRecipe />
-    //       </Route> */}
-    //       <Redirect to="/" />
-    //     </Switch>
-    //   );
-    // } else {
-    //   routes = (
-    //     <Switch>
-    //       <Route path="/" exact>
-    //         <Recipes RECIPES={RECIPES}/>
-    //       </Route>
-    //       {/* <Route path="/:userId/recipes" exact>
-    //         <UserPlaces />
-    //       </Route> */}
-    //       <Route path="/auth">
-    //         <Auth />
-    //       </Route>
-    //       <Redirect to="/auth" />
-    //     </Switch>
-    //   );
-    // }
-
-    // return (
-    //   <AuthContext.Provider
-    //     value={{
-    //       isLoggedIn: isLoggedIn,
-    //       userId: userId,
-    //       login: login,
-    //       logout: logout
-    //     }}
-    //   >
-    //     <Router>
-    //       <MainNavigation />
-    //       <main>{routes}</main>
-    //     </Router>
-    //   </AuthContext.Provider>
-    // );
-
     return (
-        <AuthContext.Provider
-            value={{
-                isLoggedIn: !!token,
-                token: token,
-                userId: userId,
-                login: login,
-                logout: logout,
-            }}
-        >
-            <View>
-                <Router>
-                    <div className='app__container'>
-                        <MainNavigation />
-                        <Switch>
-                            {/* <Route path='/' exact>
+        <View>
+            <Nav />
+            <Router>
+                {/* <MainNavigation /> */}
+                <Switch>
+                    {/* <Route path='/' exact>
                                 <Recipes RECIPES={RECIPES} />
                             </Route> */}
-                            {/* <Route path="/:recipeId" exact>
+                    {/* <Route path="/:recipeId" exact>
                 <RecipeInstructions />
               </Route> */}
-                            {/* <Route path='/uid' exact>
+                    {/* <Route path='/uid' exact>
                                 <UserProfile
                                     USERS={USERS}
                                     // USERS={userRecipeFilteredList}
                                     RECIPES={RECIPES}
                                 />
                             </Route> */}
-                            <Route path='/newrecipe' exact>
-                                <NewRecipe />
-                            </Route>
-                            {/* <Route path='/chefs' exact>
+                    <Route path='/newrecipe' exact>
+                        <NewRecipe />
+                    </Route>
+                    {/* <Route path='/chefs' exact>
                                 <Users />
                             </Route>
                             <Route path='/chefs/:userId' exact>
                                 <UserRecipes />
                             </Route> */}
-                            <Route path='/login' exact>
-                                <Auth />
-                            </Route>
-                            <Redirect to='/' />
-                        </Switch>
-                    </div>
-                </Router>
-            </View>
-        </AuthContext.Provider>
+                    <Route path='/login' exact>
+                        <Auth />
+                    </Route>
+                    <Redirect to='/' />
+                </Switch>
+            </Router>
+        </View>
     );
 };
 

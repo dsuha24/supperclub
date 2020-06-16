@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import View from "./style";
 
 import Input from "../../../../components/input";
@@ -29,11 +29,10 @@ const RecipeInstructions = ({ steps, editField, pushArray, deleteArray }) => {
                         editField(`steps[${stepNumber}].shortDescription`, e)
                     }
                 />
-                {/* <Input type='file' value={image} label='Image' /> */}
                 <ImageUpload
-                    image={image}
                     className='recipe-instructions__photo'
                     id='image'
+                    image={image}
                     field={`steps[${stepNumber}].image`}
                     onInput={editField}
                 />
@@ -74,6 +73,7 @@ const RecipeInstructions = ({ steps, editField, pushArray, deleteArray }) => {
             <Button
                 color='primary'
                 variant='outlined'
+                disabled={steps.length === 1}
                 onClick={() => {
                     deleteArray("steps", stepNumber);
                     handleStep(0);
@@ -84,7 +84,10 @@ const RecipeInstructions = ({ steps, editField, pushArray, deleteArray }) => {
             <div className='recipe-instructions__steps'>
                 {steps.map((step, i) => (
                     <div
-                        className='recipe-instructions__step'
+                        key={i}
+                        className={`recipe-instructions__step ${
+                            stepNumber === i ? "bold" : ""
+                        }`}
                         onClick={() => handleStep(i)}
                     >
                         {i + 1}

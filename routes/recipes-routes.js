@@ -19,22 +19,18 @@ router.use(checkAuth);
 
 router.post(
     "/",
-    fileUpload.single("image"),
     [
-        check("recipeName", "Name is required").not().isEmpty(),
-        // check("image", "Image is required").not().isEmpty(),
-        // // check("difficulty", "Difficulty is required").not().isEmpty(),
-        // // check("time", "Time is required").not().isEmpty(),
-        // // check("cost", "Cost is required").not().isEmpty(),
+        check("title", "Title is required").not().isEmpty(),
+        check("image", "Image is required").not().isEmpty(),
         check("description", "Description is required").not().isEmpty(),
         check(
             "description",
             "Description needs to be more than 10 characters"
         ).isLength({ min: 10 }),
-        // check("cuisine", "Cuisine is required").not().isEmpty(),
-        // check("ingredients", "Ingredients is required").not().isEmpty(),
-        // check("steps", "Steps is required").not().isEmpty(),
-        // check("equipmentTable", "Equipment Table is required").not().isEmpty(),
+        check("cuisine", "Cuisine is required").not().isEmpty(),
+        check("ingredients", "Ingredients is required").not().isEmpty(),
+        check("steps", "Steps is required").not().isEmpty(),
+        check("equipment", "Equipment is required").not().isEmpty(),
     ],
     recipeControllers.createRecipe
 );

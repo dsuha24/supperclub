@@ -25,7 +25,6 @@ function uploadToS3(file, res) {
                 return;
             }
 
-            debugger;
             res.json(data);
         });
     });
@@ -38,6 +37,12 @@ router.post("/", [], async (req, res, next) => {
 
         busboy.on("finish", () => {
             const file = req.files.image;
+
+            if (!req.files.image) {
+                return res
+                    .status(402)
+                    .json({ errors: [{ msg: "Image not found" }] });
+            }
 
             uploadToS3(file, res);
         });

@@ -13,7 +13,7 @@ export const INITIAL_STEP_STATE = {
 };
 
 export const INITIAL_STATE = {
-    title: "Bacon ipsum dolor amet mollit doner shank",
+    title: "",
     image: "",
     description: "",
     cuisine: "",

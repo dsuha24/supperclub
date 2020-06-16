@@ -10,14 +10,8 @@ const iconMap = {
     delete: DeleteIcon,
 };
 
-const Button = ({
-    type = "add",
-    icon = false,
-    className = "",
-    size = "small",
-    ...rest
-}) => {
-    const IconType = iconMap[type];
+const Button = ({ icon, className = "", size = "small", ...rest }) => {
+    const IconType = iconMap[icon];
     if (icon) {
         return (
             <IconButton size={size} {...rest}>

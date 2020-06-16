@@ -25,7 +25,12 @@ const RecipeInstructions = styled("div")`
         &__step {
             margin-right: ${(props) => props.theme.spacing.tiny};
             cursor: pointer;
+            font-weight: normal;
         }
+    }
+
+    & .bold {
+        font-weight: bold;
     }
 `;
 
