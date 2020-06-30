@@ -25,8 +25,8 @@ router.post(
         check("description", "Description is required").not().isEmpty(),
         check(
             "description",
-            "Description needs to be more than 10 characters"
-        ).isLength({ min: 10 }),
+            "Description needs to be more than 5 characters"
+        ).isLength({ min: 5 }),
         check("cuisine", "Cuisine is required").not().isEmpty(),
         check("ingredients", "Ingredients is required").not().isEmpty(),
         check("steps", "Steps is required").not().isEmpty(),

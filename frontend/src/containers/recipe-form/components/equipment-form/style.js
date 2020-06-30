@@ -26,7 +26,6 @@ const EquipmentForm = styled("div")`
             align-items: center;
             display: flex;
             font-size: ${(props) => props.theme.fontSize.small};
-            font-family: ${(props) => props.theme.font.header};
             margin: 0 ${(props) => props.theme.spacing.smallest};
         }
 

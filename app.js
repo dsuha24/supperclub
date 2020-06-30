@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors')
 
 // File upload
 const busboy = require("connect-busboy");
@@ -16,6 +17,15 @@ const uploadsRoutes = require("./routes/uploads");
 const HttpError = require("./models/http-error");
 
 const app = express();
+
+mongoose
+    .connect(
+        `mongodb+srv://${process.env.DB_USER}:0Q8PriUNdt6PVr60@cluster0-rsl6a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+        { useNewUrlParser: true }
+    ).then(() => console.log('connected to mongodb')).catch(err => console.log(err))
+
+// cors
+app.use(cors())
 
 // File Related
 app.use(busboy());
@@ -70,13 +80,6 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-mongoose
-    .connect(
-        `mongodb+srv://${process.env.DB_USER}:0Q8PriUNdt6PVr60@cluster0-rsl6a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
-    )
-    .then(() => {
-        app.listen(process.env.PORT || 5000);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`server is running at ${port}`));

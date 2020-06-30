@@ -5,7 +5,6 @@ const Nav = styled("nav")`
 
     & .nav {
         &__items {
-            font-family: ${(props) => props.theme.font.header};
             text-transform: uppercase;
             color: ${(props) => props.theme.color.header};
             letter-spacing: -1px;

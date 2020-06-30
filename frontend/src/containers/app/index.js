@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import NewRecipe from "../recipe-form";
+import Recipe from "../recipe";
 import Nav from "../../components/nav";
 import Auth from "../../clean/shared/components/Auth";
 
@@ -33,6 +34,9 @@ const App = () => {
                             </Route> */}
                     <Route path='/newrecipe' exact>
                         <NewRecipe />
+                    </Route>
+                    <Route path='/recipe/:id' exact>
+                        <Recipe />
                     </Route>
                     {/* <Route path='/chefs' exact>
                                 <Users />

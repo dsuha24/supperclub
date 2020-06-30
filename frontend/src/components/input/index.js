@@ -1,5 +1,4 @@
 import React from "react";
-// import View from './style';
 import TextField from "@material-ui/core/TextField";
 
 const Input = ({
@@ -10,6 +9,8 @@ const Input = ({
     onChange,
     placeholder = "",
     fullWidth = true,
+    maxLength = null,
+    minLength= null,
     ...props
 }) => (
     <TextField
@@ -21,9 +22,14 @@ const Input = ({
         size={size}
         variant={variant}
         onChange={onChange}
+        inputProps={{
+            maxLength,
+            minLength
+        }}
         InputLabelProps={{
             shrink: true,
         }}
+
         {...props}
     />
 );

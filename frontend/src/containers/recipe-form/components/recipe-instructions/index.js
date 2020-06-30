@@ -23,6 +23,7 @@ const RecipeInstructions = ({ steps, editField, pushArray, deleteArray }) => {
                 <Input
                     label='Short Description'
                     fullWidth={true}
+                    maxLength="30"
                     className='recipe-instructions__short'
                     value={shortDescription}
                     onChange={(e) =>
@@ -41,8 +42,9 @@ const RecipeInstructions = ({ steps, editField, pushArray, deleteArray }) => {
                 label='Long Description'
                 value={longDescription}
                 multiline
-                rows={2}
-                rowsMax={2}
+                minLength="10"
+                rows={3}
+                rowsMax={3}
                 onChange={(e) =>
                     editField(`steps[${stepNumber}].longDescription`, e)
                 }

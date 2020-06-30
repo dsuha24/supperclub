@@ -10,7 +10,6 @@ const Preview = styled("div")`
     flex-direction: column;
 
     & h2 {
-        font-family: ${(props) => props.theme.font.header};
         font-size: ${(props) => props.theme.fontSize.base};
         font-weight: 400;
         letter-spacing: -1;

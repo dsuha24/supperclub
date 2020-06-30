@@ -13,7 +13,7 @@ export const receiveCurrentUser = (userData) => {
 
 export const signupUser = (userData) => (dispatch) => {
     axios
-        .post("users/signup", userData)
+        .post("http://localhost:5000/api/users/signup", userData)
         .then((res) => {
             // Save to localStorage
             const { token } = res.data;
@@ -34,7 +34,7 @@ export const signupUser = (userData) => (dispatch) => {
 
 export const loginUser = (userData) => (dispatch) => {
     axios
-        .post("api/users/login", userData)
+        .post("http://localhost:5000/api/users/login", userData)
         .then((res) => {
             // Save to localStorage
             const { token } = res.data;

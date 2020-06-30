@@ -52,8 +52,7 @@ const Preview = ({
                         >
                             <li>{ingredient}</li>
                             <div className='preview__quantity'>
-                                <li>{quantity}</li>
-                                <li>{units}</li>
+                                <li>{quantity} {units}</li>
                             </div>
                         </ul>
                     );

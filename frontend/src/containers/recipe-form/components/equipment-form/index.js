@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import View from "./style";
 
 import Input from "../../../../components/input";
@@ -14,21 +14,50 @@ const EquipmentForm = ({
     labelName = "Equipment",
 }) => {
     const [equipmentState, handleEquipment] = useState("");
+    // const myStateRef = React.useRef(equipmentState);
+
+
+    const handleInputChange = useCallback((e) => {
+        handleEquipment(e.target.value)
+    }, [])
+
+    // const setEquipState = useCallback((e) => {
+    //     myStateRef.current = e.target.value
+    //     handleEquipment(e.target.value)
+    // }, [])
+
+    // const handleSubmit = (e, myStateRef) => {
+    //     console.log(myStateRef)
+    //     if (e.key === 'Enter'){
+    //         if (myStateRef.length) {
+    //             pushArray(field, myStateRef);
+    //             handleEquipment("");
+    //         }
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     window.addEventListener('keydown', e => handleSubmit(e, myStateRef.current));
+    //     return window.removeEventListener('keydown', e => handleSubmit(e, myStateRef));
+    // }, [])
+
+
     return (
         <View>
             <Input
                 label={labelName}
                 fullWidth={false}
                 value={equipmentState}
-                onChange={(e) => handleEquipment(e.target.value)}
+                onChange={handleInputChange}
+                className="equipment-form__search"
                 InputProps={{
                     endAdornment: (
                         <InputAdornment
                             onClick={(e) => {
                                 if (equipmentState.length) {
                                     pushArray(field, equipmentState);
+                                    handleEquipment("");
                                 }
-                                handleEquipment("");
                             }}
                             position='end'
                         >
