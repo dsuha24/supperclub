@@ -1,0 +1,8 @@
+.image-upload__uploader {
+    display: flex;
+    align-items: center;
+}
+.image-upload__button {
+    min-width: 60px;
+    margin-top: 5px !important;
+}
